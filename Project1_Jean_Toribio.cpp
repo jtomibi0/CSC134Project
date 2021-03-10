@@ -1,17 +1,21 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main()
 {
-	int clockSpdOfGPU = 0;
-	int clockSpdOfCPU = 0;
-	int numOfCPUCores = 0;
+	//Initializes Variables
+	float clockSpdOfGPU;
+	float clockSpdOfCPU;
+	float numOfCPUCores;
 	int monitorResChoice;
 	string monitorRes;
 	float multiplier;
 	float performanceScore;
 	string recommendedGraphicsQuality;
+	string title = "Computer Hardware Graphics Quality Recommendation Tool";
 	
+	//Gets GPU clock speed
 	cout << "Please enter the clock speed (in Megahertz) of your graphics card: ";
 	cin >> clockSpdOfGPU;
 	if (clockSpdOfGPU < 0)
@@ -19,6 +23,7 @@ int main()
 		cout << "Invaild graphics card speed entered. Program will terminate.";
 		return 0;
 	}
+	//Gets CPU clock speed
 	cout << "Please enter the clock speed (in Megahertz) of your processor: ";
 	cin >> clockSpdOfCPU;
 	if (clockSpdOfCPU < 0)
@@ -26,6 +31,7 @@ int main()
 		cout << "Invalid processor speed entered. Program will terminate.";
 		return 0;
 	}
+	//Gets the number of cores in the CPU
 	cout << "Please enter the number of cores of your processor: ";
 	cin >> numOfCPUCores;
 	if (numOfCPUCores < 0)
@@ -33,6 +39,7 @@ int main()
 		cout << "Invaild number of cores entered. Program will terminate.";
 		return 0;
 	}
+	//Gets monitor resolution & determines multipler
 	cout << "What is the resolution of your monitor?\n\t1. 1280 x 720\n\t2. 1920 x 1080\n\t3. 2560 x 1440\n\t4. 3840 x 2160\nPlease select from the options above: ";
 	cin >> monitorResChoice;
 	switch (monitorResChoice)
@@ -53,7 +60,10 @@ int main()
 				 return 0;
 	}
 	
+	//Determines performance score
 	performanceScore = ((5 * clockSpdOfGPU) + (numOfCPUCores * clockSpdOfCPU)) * multiplier;
+	
+	//Determines recommended graphics quality
 	if (performanceScore > 17000)
 	{
 		recommendedGraphicsQuality = "Ultra";
@@ -75,4 +85,14 @@ int main()
 		recommendedGraphicsQuality = "Unable to Play";
 	}
 	
+	/* Displays GPU clock speed, CPU clock speed, number of cores, 
+	monitor resolution, performance score, and recommended graphics quality */
+	cout << "\n\n" << title << "\n\n";
+	cout << "GPU Clock Speed: " << clockSpdOfGPU << " MHz" << endl;
+	cout << "CPU Clock Speed: " << clockSpdOfCPU << " MHz" << endl;
+	cout << "Number of cores: " << numOfCPUCores << endl;
+	cout << "Monitor Resolution: " << monitorRes << endl;
+	cout << "Performance Score: " << setprecision(2) << fixed << performanceScore << endl;
+	cout << "Recommended Graphics Quality: " << recommendedGraphicsQuality << endl;
+	return 0;
 }
