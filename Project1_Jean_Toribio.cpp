@@ -8,6 +8,9 @@ int main()
 	int numOfCPUCores = 0;
 	int monitorResChoice;
 	string monitorRes;
+	float multiplier;
+	float performanceScore;
+	string recommendedGraphicsQuality;
 	
 	cout << "Please enter the clock speed (in Megahertz) of your graphics card: ";
 	cin >> clockSpdOfGPU;
@@ -35,14 +38,41 @@ int main()
 	switch (monitorResChoice)
 	{
 		case 1: monitorRes = "1280 x 720";
+				multiplier = 1;
 				break;
 		case 2: monitorRes = "1920 x 1080";
+				multiplier = .75;
 				break;
 		case 3: monitorRes = "2560 x 1440";
+				multiplier = .55;
 				break;
 		case 4: monitorRes = "3840 x 2160";
+				multiplier = .35;
 				break;
 		default: cout << "Invalid Resolution menu choice. Program will terminate.";
 				 return 0;
 	}
+	
+	performanceScore = ((5 * clockSpdOfGPU) + (numOfCPUCores * clockSpdOfCPU)) * multiplier;
+	if (performanceScore > 17000)
+	{
+		recommendedGraphicsQuality = "Ultra";
+	}
+	else if (performanceScore > 15000 && performanceScore < 17000)
+	{
+		recommendedGraphicsQuality = "High";
+	}
+	else if (performanceScore > 13000 && performanceScore < 15000)
+	{
+		recommendedGraphicsQuality = "Medium";
+	}
+	else if (performanceScore > 11000 && performanceScore < 13000)
+	{
+		recommendedGraphicsQuality = "Low";
+	}
+	else if (performanceScore <= 11000)
+	{
+		recommendedGraphicsQuality = "Unable to Play";
+	}
+	
 }
