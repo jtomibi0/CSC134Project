@@ -1,2 +1,2 @@
-# Project_Jean_Toribio
+# CSC134Project
 Project Depository
